@@ -104,6 +104,59 @@ tail -f ~/.claude/mcp/mlx-lm-server.error.log
 curl http://localhost:8080/v1/models
 ```
 
+## Testing the API
+
+The model server exposes an OpenAI-compatible REST API. Use these commands to verify it's working.
+
+**Check the server is up and the model is loaded:**
+```bash
+curl -s http://localhost:8080/v1/models | jq
+```
+
+Expected output:
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "AlejandroOlmedo/zeta-8bit-mlx",
+      "object": "model",
+      "created": 1774045181
+    }
+  ]
+}
+```
+
+**Send a chat completion:**
+```bash
+curl -s http://localhost:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "AlejandroOlmedo/zeta-8bit-mlx",
+    "messages": [{"role": "user", "content": "Say hello in one sentence."}],
+    "max_tokens": 64
+  }' | jq '.choices[0].message.content'
+```
+
+**Stream a completion:**
+```bash
+curl -s http://localhost:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "AlejandroOlmedo/zeta-8bit-mlx",
+    "messages": [{"role": "user", "content": "Say hello in one sentence."}],
+    "max_tokens": 64,
+    "stream": true
+  }'
+```
+
+**Test the MCP tool directly from Claude Code:**
+
+In any Claude Code session, ask:
+> "Use the local model to summarize this in one sentence: The quick brown fox jumps over the lazy dog."
+
+Claude will call `local_llm_complete` via MCP and return the result.
+
 ## How it works
 
 ```
