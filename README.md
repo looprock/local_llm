@@ -96,9 +96,8 @@ launchctl unload ~/Library/LaunchAgents/com.dsl.mlx-lm-server.plist
 # Start the model server
 launchctl load ~/Library/LaunchAgents/com.dsl.mlx-lm-server.plist
 
-# Watch logs
+# Watch logs (stdout and stderr both go here)
 tail -f ~/.claude/mcp/mlx-lm-server.log
-tail -f ~/.claude/mcp/mlx-lm-server.error.log
 
 # Test the HTTP endpoint directly
 curl http://localhost:8080/v1/models

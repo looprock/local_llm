@@ -20,11 +20,11 @@
     <key>KeepAlive</key>
     <true/>
 
-    <!-- Logs -->
+    <!-- Logs (mlx_lm.server writes everything to stderr) -->
     <key>StandardOutPath</key>
     <string>/Users/dsl/.claude/mcp/mlx-lm-server.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/dsl/.claude/mcp/mlx-lm-server.error.log</string>
+    <string>/Users/dsl/.claude/mcp/mlx-lm-server.log</string>
 
     <!-- Give it time to load the model before marking as failed -->
     <key>ThrottleInterval</key>
