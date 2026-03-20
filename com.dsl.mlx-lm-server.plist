@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.dsl.mlx-lm-server</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/dsl/.venv/bin/mlx_lm.server</string>
+        <string>--model</string>
+        <string>AlejandroOlmedo/zeta-8bit-mlx</string>
+        <string>--port</string>
+        <string>8080</string>
+    </array>
+
+    <!-- Start at login and restart on crash -->
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Logs -->
+    <key>StandardOutPath</key>
+    <string>/Users/dsl/.claude/mcp/mlx-lm-server.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/dsl/.claude/mcp/mlx-lm-server.error.log</string>
+
+    <!-- Give it time to load the model before marking as failed -->
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+</dict>
+</plist>
